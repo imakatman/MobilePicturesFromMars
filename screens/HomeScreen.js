@@ -1,6 +1,6 @@
 import React from 'react';
 import Swiper from 'react-native-swiper';
-import { StyleSheet, TouchableHighlight, View, Text } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import { connect } from 'react-redux';
 
 const styles = StyleSheet.create({
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
   }
 });
 
-class Home extends React.Component {
+class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -36,10 +36,12 @@ class Home extends React.Component {
   render() {
     return (
       <Swiper style={styles.wrapper} showsButtons={true}>
-        <View style={styles.slide1} onTouchEnd={}>
+        {/*<View style={styles.slide1} onTouchEnd={}>*/}
+        <View style={styles.slide1}>
           <Text style={styles.text}>Hello Swiper</Text>
         </View>
-        <View style={styles.slide2} onTouchEnd={}>
+        {/*<View style={styles.slide2} onTouchEnd={}>*/}
+        <View style={styles.slide2}>
           <Text style={styles.text}>Beautiful</Text>
         </View>
       </Swiper>
@@ -53,4 +55,5 @@ function mapStoreToProps(state) {
   return {  };
 }
 
-export default connect(mapStoreToProps)(Home);
+// export default connect(mapStoreToProps)(HomeScreen);
+export default HomeScreen;

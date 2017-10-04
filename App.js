@@ -7,13 +7,16 @@ import { StyleSheet, Modal, Text, View } from 'react-native';
 import { connect } from 'react-redux';
 
 import { store } from './store';
-import Home from './screens/Home';
+import HomeScreen from './screens/HomeScreen';
 
 // const appStore = persistStore(store);
 const PicturesFromMars = StackNavigator({
-  Home: {
-    screen: Home
+  HomeScreen: {
+    path: "/",
+    screen: HomeScreen
   }
+}, {
+  initialRouteName: HomeScreen
 });
 
 class App extends React.Component {
