@@ -1,6 +1,9 @@
-import { combineReducers, createStore, compose, applyMiddleware } from 'redux';
+import { combineReducers, createStore, applyMiddleware } from 'redux';
 import { createLogger } from 'redux-logger';
 import { autoRehydrate } from 'redux-persist';
+
+import initialState from './initialState';
+import { Mission_Manifest } from './reducers/data';
 
 // const rootReducer = combineReducers({
 //
@@ -8,12 +11,13 @@ import { autoRehydrate } from 'redux-persist';
 
 const loggerMiddleware = createLogger();
 
-export const store = createStore(
-  compose(
-    // rootReducer,
+export default function configureStore() {
+  return createStore(
+    Mission_Manifest,
+    initialState,
     autoRehydrate(),
     applyMiddleware(
       loggerMiddleware
     )
-  )
-);
+  );
+}

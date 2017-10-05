@@ -3,33 +3,16 @@ import Swiper from 'react-native-swiper';
 import { StyleSheet, View, Text } from 'react-native';
 import { connect } from 'react-redux';
 
-const styles = StyleSheet.create({
-  wrapper: {},
-  slide1: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#9DD6EB',
-  },
-  slide2: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#97CAE5',
-  },
-  text: {
-    color: '#fff',
-    fontSize: 30,
-    fontWeight: 'bold',
-  }
-});
+import { fetchData } from '../actions/getData';
 
 class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
   }
 
-  componentWillMount(){
+  componentWillMount() {
+    let { dispatch } = this.props;
+
     dispatch(fetchData());
   }
 
@@ -50,10 +33,30 @@ class HomeScreen extends React.Component {
 }
 
 function mapStoreToProps(state) {
-  const {  } = state;
+  const { dispatch } = state;
 
-  return {  };
+  return { dispatch };
 }
 
-// export default connect(mapStoreToProps)(HomeScreen);
-export default HomeScreen;
+export default connect(mapStoreToProps)(HomeScreen);
+
+const styles = StyleSheet.create({
+  wrapper: {},
+  slide1: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#9DD6EB',
+  },
+  slide2: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#97CAE5',
+  },
+  text: {
+    color: '#fff',
+    fontSize: 30,
+    fontWeight: 'bold',
+  }
+});

@@ -1,50 +1,31 @@
 import React from 'react';
-import { Provider } from 'redux';
+import { Provider } from 'react-redux';
 import { persistStore } from 'redux-persist';
 import { StackNavigator } from 'react-navigation';
 
 import { StyleSheet, Modal, Text, View } from 'react-native';
 import { connect } from 'react-redux';
 
-import { store } from './store';
+import configureStore from './store';
 import HomeScreen from './screens/HomeScreen';
 
-// const appStore = persistStore(store);
 const PicturesFromMars = StackNavigator({
   HomeScreen: {
     path: "/",
     screen: HomeScreen
   }
-}, {
-  initialRouteName: HomeScreen
 });
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+  store = configureStore();
 
   render() {
-    // let {  } = this.props;
-
-    // return (
-    //   <Provider store={store}>
-    //     <NativeRouter>
-    //       <Route to="/" component={Home} />
-    //     </NativeRouter>
-    //   </Provider>
-    // )
     return (
-      <PicturesFromMars />
-    )
+      <Provider store={this.store}>
+        <PicturesFromMars/>
+      </Provider>
+    );
   }
 }
 
-function mapStoreToProps(state) {
-  // const { first_time } = state;
-  //
-  // return { first_time };
-}
-
-// export default connect(mapStoreToProps)(App);
 export default App;
