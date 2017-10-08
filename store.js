@@ -1,4 +1,5 @@
-import { combineReducers, createStore, applyMiddleware } from 'redux';
+import { combineReducers, createStore, compose, applyMiddleware } from 'redux';
+import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 import { autoRehydrate } from 'redux-persist';
 
@@ -15,9 +16,12 @@ export default function configureStore() {
   return createStore(
     Mission_Manifest,
     initialState,
-    autoRehydrate(),
-    applyMiddleware(
-      loggerMiddleware
+    compose(
+      autoRehydrate(),
+      applyMiddleware(
+        thunkMiddleware,
+        loggerMiddleware
+      )
     )
   );
 }

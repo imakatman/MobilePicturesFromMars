@@ -8,11 +8,11 @@ const initialState = {
         exhausted: false
       }, {
         key: "a4q0jhngYKp9kn0cuwvKMHtKz7IrkKtFBRaiMv5t",
-        inUse: true,
+        inUse: false,
         exhausted: false
       }, {
         key: "ef0eRn0aLh0Byb8q7wCniHbiqcjfDWITSIJVh9xy",
-        inUse: true,
+        inUse: false,
         exhausted: false
       }
     ],
