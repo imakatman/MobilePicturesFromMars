@@ -3,25 +3,24 @@ import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 import { autoRehydrate } from 'redux-persist';
 
+import { Api_Keys, Mission_Manifest } from './reducers/data';
 import initialState from './initialState';
-import { Mission_Manifest } from './reducers/data';
 
-// const rootReducer = combineReducers({
-//
-// });
+const rootReducer = combineReducers({
+  Api_Keys,
+  Mission_Manifest,
+});
 
 const loggerMiddleware = createLogger();
 
-export default function configureStore() {
-  return createStore(
-    Mission_Manifest,
+export default store =
+  createStore(
+    rootReducer,
     initialState,
     compose(
-      autoRehydrate(),
       applyMiddleware(
         thunkMiddleware,
         loggerMiddleware
       )
     )
   );
-}

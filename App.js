@@ -4,9 +4,8 @@ import { persistStore } from 'redux-persist';
 import { StackNavigator } from 'react-navigation';
 
 import { StyleSheet, Modal, Text, View } from 'react-native';
-import { connect } from 'react-redux';
 
-import configureStore from './store';
+import store from './store';
 import HomeScreen from './screens/HomeScreen';
 
 const PicturesFromMars = StackNavigator({
@@ -17,11 +16,9 @@ const PicturesFromMars = StackNavigator({
 });
 
 class App extends React.Component {
-  store = configureStore();
-
   render() {
     return (
-      <Provider store={this.store}>
+      <Provider store={store}>
         <PicturesFromMars/>
       </Provider>
     );
