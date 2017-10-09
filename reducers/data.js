@@ -5,29 +5,33 @@ import {
   RECEIVE_DATA
 } from '../actions/getData';
 
-function setApiKey(state = initialState.Api_Keys.Keys, action, key) {
-  if (key[action.keyInUse]) {
-    return Object.assign({}, state, {
+function setApiKey(key, action) {
+  if (key.key === action.keyInUse) {
+    return Object.assign({}, key, {
       inUse: true
     });
   } else {
-    return Object.assign({}, state, {
+    return Object.assign({}, key, {
       inUse: false
     });
+  }
+}
+
+function Keys(state = initialState.Api_Keys.Keys, action) {
+  if (action.type === SELECT_KEY_INUSE) {
+    return state.map(keyObj => (
+        {
+          [Object.keys(keyObj)[0]]: setApiKey(keyObj[Object.keys(keyObj)[0]], action)
+        }
+    ));
   }
 }
 
 export function Api_Keys(state = initialState.Api_Keys, action) {
   switch (action.type) {
     case SELECT_KEY_INUSE:
-      return state.Keys.map(key => {
-        Object.assign({}, state, {
-          Keys: [
-            {
-              [Object.keys(key)]: setApiKey(state.Keys, action, key)
-            }
-          ]
-        });
+      return Object.assign({}, state, {
+        Keys: Keys(state.Keys, action)
       });
     default:
       return state;

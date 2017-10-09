@@ -15,9 +15,9 @@ export function fetchData() {
 
     dispatch(selectKeyInUse(apiKey));
     dispatch(requestData());
-    return fetch(`https://api.nasa.gov/mars-photos/api/v1/rovers?api_key=${apiKey}`)
-      .then(response => response.json())
-      .then(json => dispatch(receiveData(json)));
+    // return fetch(`https://api.nasa.gov/mars-photos/api/v1/rovers?api_key=${apiKey}`)
+    //   .then(response => response.json())
+    //   .then(json => dispatch(receiveData(json)));
   }
 }
 
