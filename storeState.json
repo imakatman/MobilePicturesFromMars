@@ -1,6 +1,6 @@
 App_State: {
     // redux-persist should ignore the Mission_Manifest and Selected reducers
-    // fetch("nasa api rovers")	
+    // fetch("nasa api rovers") 
     "Api_Keys": {
         "indexOfKeyInUse": 0,
         "Keys": [{
@@ -24,33 +24,38 @@ App_State: {
         // Opportunity
         // Spirit
     },
-    "Cameras": {
+    "Cameras_Data": {
         // ~~ Selected Rover Screen
         // ~~~ If Mission_Manifest is still fetching, show "Loading..."
-        "Curiosity": {
-            "Cameras": {
-                "FHAVCAM": {
-                    "Name": "FHAVCAM",
-                    "Full_Name": "Front Hazard Avoidance Camera",
-                    "Pictures": {
-                        "2017-08-21": [
-                            // imageObject,
-                            // imageObject,
-                        ],
-                        // * loadMore(rover, Selected.Camera.Date)
-                        // *** fetch(domain?rover&max_date&camera&page2)
-                        // *** if json returns empty object...
-                        // *** fetch(domain?rover&max_date - 1&camera&page1)
-                        "2017-08-20": [
-                            // imageObject,
-                            // imageObject,
-                        ],
-                    }
-                },
-                // ...
+        "isFetching": false,
+        "Rovers": {
+            "Curiosity": {
+                "Cameras": [
+                    {
+                        "FHAVCAM": {
+                            "Name": "FHAVCAM",
+                            "Full_Name": "Front Hazard Avoidance Camera",
+                            "Pictures": {
+                                "2017-08-21": [
+                                    // imageObject,
+                                    // imageObject,
+                                ],
+                                // * loadMore(rover, Selected.Camera.Date)
+                                // *** fetch(domain?rover&max_date&camera&page2)
+                                // *** if json returns empty object...
+                                // *** fetch(domain?rover&max_date - 1&camera&page1)
+                                "2017-08-20": [
+                                    // imageObject,
+                                    // imageObject,
+                                ],
+                            }
+                        }
+                    },
+                    // ...
+                ],
             },
-        },
-        // ...
+            // ...
+        }
     },
     "Selected": {
         // * selectRover(rover, max_date)

@@ -22,6 +22,10 @@ const initialState = {
   Mission_Manifest: {
     isFetching: false,
   },
+  Cameras_Data: {
+    isFetching: false,
+    Rovers: {}
+  }
 };
 
 export default initialState;
