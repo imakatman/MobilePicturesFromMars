@@ -13,7 +13,7 @@ class HomeScreen extends React.Component {
       onMainNav: false
     };
 
-    this.indexChanged = this.indexChanged.bind(this);
+    this.toggleHorizontalSwipe = this.toggleHorizontalSwipe.bind(this);
   }
 
   componentWillMount() {
@@ -22,7 +22,7 @@ class HomeScreen extends React.Component {
     dispatch(fetchData());
   }
 
-  indexChanged(i){
+  toggleHorizontalSwipe(i){
     if(i === 0){
       this.setState({onMainNav: true});
     } else if (i === 1){
@@ -52,7 +52,7 @@ class HomeScreen extends React.Component {
                 showsPagination={false}
                 loadMinimal={true}
                 loop={false}
-                onIndexChanged={(i)=>this.indexChanged(i)}>
+                onIndexChanged={(i)=>this.toggleHorizontalSwipe(i)}>
                 <View style={styles.slide1}>
                   <Text style={styles.text}> {rover.Name} </Text>
                   <Text style={styles.text}> Last Updated: {rover.Max_Date} </Text>
