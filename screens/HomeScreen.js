@@ -1,6 +1,6 @@
 import React from 'react';
 import Swiper from 'react-native-swiper';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, TouchableHighlight, Text } from 'react-native';
 import { connect } from 'react-redux';
 
 import { fetchData } from '../actions/getData';
@@ -25,10 +25,12 @@ class HomeScreen extends React.Component {
       <Swiper style={styles.wrapper} showsButtons={true}>
         {
           Mission_Manifest.Rovers.map(rover =>
-            <View key={rover.Name} style={styles.slide1} onTouchEnd={()=>console.log(rover.Name)}>
-              <Text style={styles.text}>
-                {rover.Name}
-              </Text>
+            <View key={rover.Name} style={styles.slide1}>
+              <TouchableHighlight onPress={()=>console.log(rover.Name)} style={styles.touchable}>
+                <Text style={styles.text}>
+                  {rover.Name}
+                </Text>
+              </TouchableHighlight>
             </View>
           )
         }
@@ -53,11 +55,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#9DD6EB',
   },
-  slide2: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#97CAE5',
+  touchable: {
+    width: '100%',
+    height: '100%'
   },
   text: {
     color: '#fff',
