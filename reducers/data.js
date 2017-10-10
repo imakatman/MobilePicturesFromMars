@@ -98,7 +98,6 @@ export function Mission_Manifest(state = initialState.Mission_Manifest, action) 
 
 function Pictures(state, action){
   switch(action.type){
-    case()
   }
 }
 
