@@ -8,12 +8,26 @@ import { fetchData } from '../actions/getData';
 class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      onMainNav: false
+    };
+
+    this.indexChanged = this.indexChanged.bind(this);
   }
 
   componentWillMount() {
     let { dispatch } = this.props;
 
     dispatch(fetchData());
+  }
+
+  indexChanged(i){
+    if(i === 0){
+      this.setState({onMainNav: true});
+    } else if (i === 1){
+      this.setState({onMainNav: false});
+    }
   }
 
   render() {
@@ -25,18 +39,29 @@ class HomeScreen extends React.Component {
       )
     } else if (!Mission_Manifest.isFetching) {
       return (
-        <Swiper style={styles.wrapper} showsButtons={true}>
+        <Swiper
+          style={styles.wrapper}
+          showsPagination={false}
+          loop={false}
+          scrollEnabled={this.state.onMainNav}>
           {
-            Mission_Manifest.Rovers.map(rover =>
-              <View key={rover.Name} style={styles.slide1}>
-                <TouchableHighlight onPress={()=>console.log(rover.Name)} style={styles.touchable}>
-                  <View>
-                    <Text style={styles.text}> {rover.Name} </Text>
-                    <Text style={styles.text}> Last Updated: {rover.Max_Date} </Text>
-                    <Text style={styles.text}> Total Photos: {rover.Total_Photos} </Text>
-                  </View>
-                </TouchableHighlight>
-              </View>
+            Mission_Manifest.Rovers.map((rover, i) =>
+              <Swiper
+                key={rover.name}
+                horizontal={false}
+                showsPagination={false}
+                loadMinimal={true}
+                loop={false}
+                onIndexChanged={(i)=>this.indexChanged(i)}>
+                <View style={styles.slide1}>
+                  <Text style={styles.text}> {rover.Name} </Text>
+                  <Text style={styles.text}> Last Updated: {rover.Max_Date} </Text>
+                  <Text style={styles.text}> Total Photos: {rover.Total_Photos} </Text>
+                </View>
+                <View>
+                  <Text>Photos</Text>
+                </View>
+              </Swiper>
             )
           }
         </Swiper>
