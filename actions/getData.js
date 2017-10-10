@@ -54,3 +54,20 @@ function receiveData(data) {
     data,
   }
 }
+
+export const REQUEST_PHOTOS = 'requestPhotos';
+
+function requestPhotos() {
+  return {
+    type: REQUEST_PHOTOS,
+  }
+}
+
+export const RECEIVE_PHOTOS = 'receivePhotos';
+
+function receivePhotos(data) {
+  return {
+    type: RECEIVE_PHOTOS,
+    data,
+  }
+}
