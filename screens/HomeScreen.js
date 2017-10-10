@@ -17,25 +17,30 @@ class HomeScreen extends React.Component {
   }
 
   render() {
+    let { dispatch, Mission_Manifest, Cameras_Data } = this.props;
+
+    console.log(Mission_Manifest.Rovers);
+
     return (
       <Swiper style={styles.wrapper} showsButtons={true}>
-        {/*<View style={styles.slide1} onTouchEnd={}>*/}
-        <View style={styles.slide1}>
-          <Text style={styles.text}>Hello Swiper</Text>
-        </View>
-        {/*<View style={styles.slide2} onTouchEnd={}>*/}
-        <View style={styles.slide2}>
-          <Text style={styles.text}>Beautiful</Text>
-        </View>
+        {
+          Mission_Manifest.Rovers.map(rover =>
+            <View key={rover.Name} style={styles.slide1} onTouchEnd={()=>console.log(rover.Name)}>
+              <Text style={styles.text}>
+                {rover.Name}
+              </Text>
+            </View>
+          )
+        }
       </Swiper>
     )
   }
 }
 
 function mapStoreToProps(state) {
-  const { dispatch } = state;
+  let { dispatch, Mission_Manifest, Cameras_Data } = state;
 
-  return { dispatch };
+  return { dispatch, Mission_Manifest, Cameras_Data };
 }
 
 export default connect(mapStoreToProps)(HomeScreen);

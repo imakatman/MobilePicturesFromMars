@@ -56,13 +56,12 @@ function Rovers_Mission(state = initialState.Mission_Manifest.Rovers, action) {
       let rovers = action.data.rovers;
       return rovers.map(rover => (
         {
-          [rover.name]: {
-            id: rover.id,
-            Total_Photos: rover.total_photos,
-            Status: rover.status,
-            Max_Sol: rover.max_sol,
-            Max_Date: rover.max_date,
-          }
+          Name: rover.name,
+          id: rover.id,
+          Total_Photos: rover.total_photos,
+          Status: rover.status,
+          Max_Sol: rover.max_sol,
+          Max_Date: rover.max_date,
         }
       ));
     default:

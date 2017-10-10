@@ -14,15 +14,18 @@ App_State: {
     },
     "Mission_Manifest": {
         "isFetching": false,
-        "Curiosity": {
-            "id": 5,
-            "Total_Photos": 2900,
-            "Status": "active",
-            "Max_Sol": 900,
-            "Max_Date": "2017-08-21",
-        },
-        // Opportunity
-        // Spirit
+        "Rovers": [
+            {
+                "name": "Curiosity",
+                "id": 5,
+                "Total_Photos": 2900,
+                "Status": "active",
+                "Max_Sol": 900,
+                "Max_Date": "2017-08-21",
+            },
+            // Opportunity
+            // Spirit
+        ]
     },
     "Cameras_Data": {
         // ~~ Selected Rover Screen
@@ -30,8 +33,7 @@ App_State: {
         "isFetching": false,
         "Rovers": {
             "Curiosity": {
-                "Cameras": [
-                    {
+                "Cameras": [{
                         "FHAVCAM": {
                             "Name": "FHAVCAM",
                             "Full_Name": "Front Hazard Avoidance Camera",

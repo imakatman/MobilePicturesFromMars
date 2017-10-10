@@ -21,10 +21,11 @@ const initialState = {
   },
   Mission_Manifest: {
     isFetching: false,
+    Rovers: []
   },
   Cameras_Data: {
     isFetching: false,
-    Rovers: {}
+    Rovers: []
   }
 };
 
