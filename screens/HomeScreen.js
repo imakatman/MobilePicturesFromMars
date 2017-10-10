@@ -19,26 +19,29 @@ class HomeScreen extends React.Component {
   render() {
     let { dispatch, Mission_Manifest, Cameras_Data } = this.props;
 
-    return (
-      <Swiper style={styles.wrapper} showsButtons={!Mission_Manifest.isFetching}>
-        {
-          Mission_Manifest.isFetching && <View style={styles.slide1}><Text style={styles.text}>Loading...</Text></View>
-        }
-        {
-          Mission_Manifest.Rovers.map(rover =>
-            <View key={rover.Name} style={styles.slide1}>
-              <TouchableHighlight onPress={()=>console.log(rover.Name)} style={styles.touchable}>
-                <View>
-                  <Text style={styles.text}> {rover.Name} </Text>
-                  <Text style={styles.text}> Last Updated: {rover.Max_Date} </Text>
-                  <Text style={styles.text}> Total Photos: {rover.Total_Photos} </Text>
-                </View>
-              </TouchableHighlight>
-            </View>
-          )
-        }
-      </Swiper>
-    )
+    if (Mission_Manifest.isFetching) {
+      return (
+        <View style={styles.slide1}><Text style={styles.text}>Loading...</Text></View>
+      )
+    } else if (!Mission_Manifest.isFetching) {
+      return (
+        <Swiper style={styles.wrapper} showsButtons={true}>
+          {
+            Mission_Manifest.Rovers.map(rover =>
+              <View key={rover.Name} style={styles.slide1}>
+                <TouchableHighlight onPress={()=>console.log(rover.Name)} style={styles.touchable}>
+                  <View>
+                    <Text style={styles.text}> {rover.Name} </Text>
+                    <Text style={styles.text}> Last Updated: {rover.Max_Date} </Text>
+                    <Text style={styles.text}> Total Photos: {rover.Total_Photos} </Text>
+                  </View>
+                </TouchableHighlight>
+              </View>
+            )
+          }
+        </Swiper>
+      )
+    }
   }
 }
 
