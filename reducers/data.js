@@ -2,8 +2,13 @@ import initialState from '../initialState';
 import {
   SELECT_KEY_INUSE,
   REQUEST_DATA,
-  RECEIVE_DATA
+  RECEIVE_DATA,
+  REQUEST_PICTURES,
+  RECEIVE_PICTURES,
 } from '../actions/getData';
+
+
+
 
 // *
 // *
@@ -90,6 +95,12 @@ export function Mission_Manifest(state = initialState.Mission_Manifest, action) 
 // * Cameras
 // * ========================================================================== */
 // *
+
+function Pictures(state, action){
+  switch(action.type){
+    case()
+  }
+}
 
 function Cameras(state, action, index) {
   switch (action.type) {

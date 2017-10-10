@@ -14,8 +14,7 @@ App_State: {
     },
     "Mission_Manifest": {
         "isFetching": false,
-        "Rovers": [
-            {
+        "Rovers": [{
                 "name": "Curiosity",
                 "id": 5,
                 "Total_Photos": 2900,

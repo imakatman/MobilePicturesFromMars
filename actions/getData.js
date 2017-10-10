@@ -55,19 +55,19 @@ function receiveData(data) {
   }
 }
 
-export const REQUEST_PHOTOS = 'requestPhotos';
+export const REQUEST_PICTURES = 'requestPictures';
 
-function requestPhotos() {
+function requestPictures() {
   return {
-    type: REQUEST_PHOTOS,
+    type: REQUEST_PICTURES,
   }
 }
 
-export const RECEIVE_PHOTOS = 'receivePhotos';
+export const RECEIVE_PICTURES = 'receivePictures';
 
-function receivePhotos(data) {
+function receivePictures(data) {
   return {
-    type: RECEIVE_PHOTOS,
+    type: RECEIVE_PICTURES,
     data,
   }
 }
