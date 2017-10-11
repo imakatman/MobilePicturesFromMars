@@ -61,7 +61,10 @@ App_State: {
     "Selected": {
         // * selectRover(rover, max_date)
         // *** fetch(domain?rover&max_date&firstCameraInArray&page1)
-        "isSelected": true,
+        "Rover":{
+            "Name": "Curiosity",
+            "selected": true
+        },
         "Camera": {
             "Name": "FHAVCAM",
             "Full_Name": "Front Hazard Avoidance Camera",

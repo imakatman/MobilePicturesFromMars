@@ -26,6 +26,17 @@ const initialState = {
   Cameras_Data: {
     isFetching: false,
     Rovers: []
+  },
+  Selected: {
+    Rover: {
+      selected: false
+    },
+    Camera: {
+
+    },
+    Image: {
+
+    }
   }
 };
 
