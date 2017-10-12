@@ -39,7 +39,6 @@ class HomeScreen extends React.Component {
     if(i === 0){
       this.setState({onMainNav: true});
     } else if (i === 1){
-      console.log("aye");
       this.setState({onMainNav: false});
       dispatch(selectRover(this.state.activeRover));
     }
@@ -74,7 +73,7 @@ class HomeScreen extends React.Component {
                   <Text style={styles.text}> Last Updated: {rover.Max_Date} </Text>
                   <Text style={styles.text}> Total Photos: {rover.Total_Photos} </Text>
                 </View>
-                <Rover name={rover.Name}/>
+                <Rover rover={rover.Name} cameras={Cameras_Data.Rovers[i]}/>
               </Swiper>
             )
           }

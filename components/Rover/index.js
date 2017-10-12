@@ -1,23 +1,27 @@
 import React from 'react';
 // import Swiper from 'react-native-swiper';
-import { StyleSheet, View, TouchableHighlight, Text } from 'react-native';
+import { StyleSheet, View, FlatList,  TouchableHighlight, Text } from 'react-native';
 
 // import { fetchData, selectRover } from '../actions/getData';
 
-class Rover extends React.Component {
-  constructor(props) {
+class Rover extends React.PureComponent {
+  constructor(props){
     super(props);
   }
 
   render() {
-    // let { dispatch, Mission_Manifest, Cameras_Data } = this.props;
-    return(
+    const rover = this.props.rover;
+    let data = this.props.cameras[rover];
+    console.log(rover);
+    console.log(data);
+    return (
       <View style={styles.slide1}>
-        <Text style={styles.text}>
-          {this.props.name}
-        </Text>
+        <FlatList
+          data={data}
+          renderItem={({data}) => <Text key={data.Name}>{data.Name}</Text>}
+        />
       </View>
-    )
+    );
   }
 }
 
@@ -28,10 +32,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#9DD6EB',
+    backgroundColor: '#eeeeee',
   },
   text: {
-    color: '#fff',
+    color: '#4c4c4c',
     fontSize: 30,
     fontWeight: 'bold',
   }
