@@ -6,3 +6,12 @@ export function selectRover(rover) {
     rover
   }
 }
+
+export const SELECT_CAMERA = "selectCamera";
+
+export function selectCamera(camera, date, sol, fetching, page) {
+  return {
+    type: SELECT_CAMERA,
+    camera
+  }
+}

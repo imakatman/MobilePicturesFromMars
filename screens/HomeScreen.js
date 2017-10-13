@@ -3,7 +3,7 @@ import Swiper from 'react-native-swiper';
 import { StyleSheet, StatusBar, View, TouchableHighlight, Text } from 'react-native';
 import { connect } from 'react-redux';
 
-import { fetchData } from '../actions/getData';
+import { fetchData, fetchPictures } from '../actions/getData';
 import { selectRover } from '../actions/selected';
 import Rover from '../components/Rover';
 
@@ -45,7 +45,7 @@ class HomeScreen extends React.Component {
   }
 
   render() {
-    let { dispatch, Mission_Manifest, Cameras_Data } = this.props;
+    let { dispatch, Mission_Manifest, Cameras_Data, Selected } = this.props;
 
     if (Mission_Manifest.isFetching) {
       return (
@@ -81,7 +81,10 @@ class HomeScreen extends React.Component {
                 <Rover
                   name={rover.Name}
                   cameras={Cameras_Data.Rovers[i][rover.Name]}
-                  isFetching={Cameras_Data.isFetching} />
+                  manifest={Mission_Manifest.Rovers[i]}
+                  fetchPictures={(camera, date, page)=>dispatch(fetchPictures(camera, date, page))}
+                  isFetching={Cameras_Data.isFetching}
+                  selectedCamera={Selected.Camera.selected}/>
               </Swiper>
             )
           }
@@ -92,9 +95,9 @@ class HomeScreen extends React.Component {
 }
 
 function mapStoreToProps(state) {
-  let { dispatch, Mission_Manifest, Cameras_Data } = state;
+  let { dispatch, Mission_Manifest, Cameras_Data, Selected } = state;
 
-  return { dispatch, Mission_Manifest, Cameras_Data };
+  return { dispatch, Mission_Manifest, Cameras_Data, Selected };
 }
 
 export default connect(mapStoreToProps)(HomeScreen);

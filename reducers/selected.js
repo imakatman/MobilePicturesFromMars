@@ -1,6 +1,7 @@
 import initialState from '../initialState';
 import {
- SELECT_ROVER
+  SELECT_ROVER,
+  SELECT_CAMERA
 } from '../actions/selected';
 
 export function Selected(state = initialState.Selected, action) {
@@ -10,6 +11,12 @@ export function Selected(state = initialState.Selected, action) {
         Rover: {
           Name: action.rover,
           selected: true
+        }
+      });
+    case SELECT_CAMERA:
+      return Object.assign({}, state, {
+        Camera: {
+          Name: action.camera,
         }
       });
     default:

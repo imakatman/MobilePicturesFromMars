@@ -21,6 +21,14 @@ export function fetchData() {
   }
 }
 
+export const FETCH_PICTURES = "fetchPictures";
+
+export function fetchPictures(camera, date, page) {
+  return {
+    type: FETCH_PICTURES,
+  }
+}
+
 // =============== **************
 //
 //

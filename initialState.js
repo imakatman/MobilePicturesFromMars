@@ -32,7 +32,7 @@ const initialState = {
       selected: false
     },
     Camera: {
-
+      selected: false
     },
     Image: {
 
