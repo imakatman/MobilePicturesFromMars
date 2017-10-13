@@ -1,5 +1,3 @@
-<script src="http://localhost:19000"></script>
-
 import React from 'react';
 import { Provider } from 'react-redux';
 import { persistStore } from 'redux-persist';
