@@ -1,6 +1,6 @@
 App_State: {
         // redux-persist should ignore the Mission_Manifest and Selected reducers
-        // fetch("nasa api rovers") 
+        // fetch("nasa api rovers")
         "Api_Keys": {
             "indexOfKeyInUse": 0,
             "Keys": [{
@@ -33,7 +33,6 @@ App_State: {
             "Rovers": [{
                     "Curiosity": {
                         "Cameras": [{
-                                "FHAVCAM": {
                                     "Name": "FHAVCAM",
                                     "Full_Name": "Front Hazard Avoidance Camera",
                                     "Pictures": {
@@ -50,7 +49,6 @@ App_State: {
                                             // imageObject,
                                         ],
                                     }
-                                }
                             },
                             // ...
                         ],

@@ -8,38 +8,41 @@ class Rover extends React.PureComponent {
   constructor(props) {
     super(props);
 
-    this.state = {
-      rover: 'undefined',
-      cameras: []
-    }
+    this._renderItem = this._renderItem.bind(this);
   }
 
-  componentWillMount() {
-    let camerasArray = [];
-    // this.props.cameras[this.props.name].map(camera => camerasArray.push(Object.keys(camera)));
-    this.props.cameras[this.props.name].map(camera => console.log(Object.keys(camera)));
+  _renderItem = ({ item }) => {
+    const name = Object.keys(item)[0];
+    const data = item[name];
 
-    this.setState({
-        cameras: camerasArray
-      }, () => {
-        console.log(this.state.cameras);
-      })
+    return (
+      <Text style={styles.text}>
+        {data.Name}
+      </Text>
+    );
   }
 
   render() {
-    return (
-      <View style={styles.slide1}>
-        <Text>{this.props.rover}</Text>
-        <FlatList
-          data={this.props.cameras[this.props.name]}
-          renderItem={(item, i)=>
-            <Text style={styles.text}>
-              {item[this.state.cameras[i]].Name}
-            </Text>
-          }
-        />
-      </View>
-    );
+    if (this.props.isFetching) {
+      return (
+        <View style={styles.slide1}>
+          <Text style={styles.text}>
+            Loading...
+          </Text>
+        </View>
+      )
+    } else {
+      return (
+        <View style={styles.slide1}>
+          <Text style={styles.text}>{this.props.name}</Text>
+          <FlatList
+            data={this.props.cameras}
+            keyExtractor={(item, index) => index}
+            renderItem={this._renderItem}
+          />
+        </View>
+      );
+    }
   }
 }
 

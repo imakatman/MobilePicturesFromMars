@@ -73,7 +73,10 @@ class HomeScreen extends React.Component {
                   <Text style={styles.text}> Last Updated: {rover.Max_Date} </Text>
                   <Text style={styles.text}> Total Photos: {rover.Total_Photos} </Text>
                 </View>
-                <Rover name={rover.Name} cameras={Cameras_Data.Rovers[i]}/>
+                <Rover
+                  name={rover.Name}
+                  cameras={Cameras_Data.Rovers[i][rover.Name]}
+                  isFetching={Cameras_Data.isFetching} />
               </Swiper>
             )
           }
