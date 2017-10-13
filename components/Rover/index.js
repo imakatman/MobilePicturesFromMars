@@ -1,6 +1,6 @@
 import React from 'react';
 // import Swiper from 'react-native-swiper';
-import { StyleSheet, View, FlatList, TouchableHighlight, Text } from 'react-native';
+import { StyleSheet, View, StatusBar, FlatList, TouchableHighlight, Text } from 'react-native';
 
 // import { fetchData, selectRover } from '../actions/getData';
 
@@ -16,7 +16,7 @@ class Rover extends React.PureComponent {
     const data = item[name];
 
     return (
-      <Text style={styles.text}>
+      <Text style={styles.navItem}>
         {data.Name}
       </Text>
     );
@@ -26,7 +26,7 @@ class Rover extends React.PureComponent {
     if (this.props.isFetching) {
       return (
         <View style={styles.slide1}>
-          <Text style={styles.text}>
+          <Text style={styles.heading}>
             Loading...
           </Text>
         </View>
@@ -34,8 +34,10 @@ class Rover extends React.PureComponent {
     } else {
       return (
         <View style={styles.slide1}>
-          <Text style={styles.text}>{this.props.name}</Text>
+          <Text style={styles.heading}>{this.props.name}</Text>
           <FlatList
+            style={styles.camNav}
+            horizontal
             data={this.props.cameras}
             keyExtractor={(item, index) => index}
             renderItem={this._renderItem}
@@ -51,13 +53,19 @@ export default Rover;
 const styles = StyleSheet.create({
   slide1: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#eeeeee',
+    paddingTop: '10%',
+    backgroundColor: '#000',
   },
-  text: {
-    color: '#4c4c4c',
-    fontSize: 22,
+  heading: {
+    color: '#fff',
+    fontSize: 30,
     fontWeight: 'bold',
+    textAlign: 'left'
+  },
+  camNav: {
+    backgroundColor: '#fff'
+  },
+  navItem: {
+    fontSize: 22
   }
 });

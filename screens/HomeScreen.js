@@ -1,6 +1,6 @@
 import React from 'react';
 import Swiper from 'react-native-swiper';
-import { StyleSheet, View, TouchableHighlight, Text } from 'react-native';
+import { StyleSheet, StatusBar, View, TouchableHighlight, Text } from 'react-native';
 import { connect } from 'react-redux';
 
 import { fetchData } from '../actions/getData';
@@ -49,7 +49,9 @@ class HomeScreen extends React.Component {
 
     if (Mission_Manifest.isFetching) {
       return (
-        <View style={styles.slide1}><Text style={styles.text}>Loading...</Text></View>
+        <View style={styles.slide1}>
+          <Text style={styles.text}>Loading...</Text>
+        </View>
       )
     } else if (!Mission_Manifest.isFetching) {
       return (
@@ -69,6 +71,9 @@ class HomeScreen extends React.Component {
                 loop={false}
                 onIndexChanged={(i)=>this.toggleHorizontalSwipe(i)}>
                 <View style={styles.slide1}>
+                  <StatusBar
+                    barStyle={this.state.onMainNav ? "dark-content" : "light-content"}
+                  />
                   <Text style={styles.text}> {rover.Name} </Text>
                   <Text style={styles.text}> Last Updated: {rover.Max_Date} </Text>
                   <Text style={styles.text}> Total Photos: {rover.Total_Photos} </Text>
