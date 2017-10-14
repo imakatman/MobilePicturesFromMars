@@ -35,7 +35,7 @@ const initialState = {
       selected: false
     },
     Image: {
-
+      selected: false
     }
   }
 };

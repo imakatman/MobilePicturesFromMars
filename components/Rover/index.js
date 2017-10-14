@@ -14,13 +14,13 @@ class Rover extends React.PureComponent {
     this.pressNavItem   = this.pressNavItem.bind(this);
   }
 
-  componentWillMount(){
-    let firstCamera = this.props.cameras[0].Name,
-      maxDate = this.props.manifest.Max_Date;
+  componentWillMount() {
+    let rover       = this.props.name,
+        data        = this.props.cameras,
+        firstCamera = data[0].Name,
+        maxDate     = this.props.manifest.Max_Date;
 
-    console.log(firstCamera);
-    console.log(maxDate);
-    // this.props.fetchPictures(firstCamera, maxDate);
+    this.props.fetchPictures(rover, firstCamera, maxDate, 1);
   }
 
   pressNavItem = (camera: string) => {
@@ -71,10 +71,10 @@ class Rover extends React.PureComponent {
             renderItem={this._renderNavItem}
           />
           {!this.props.selectedCamera ? (
-            <Text>Loading...</Text>
-          ): (
+              <Text>Loading...</Text>
+            ) : (
               <Text>A camera has been selected</Text>
-          )}
+            )}
         </View>
       );
     }

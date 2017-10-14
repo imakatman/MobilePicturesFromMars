@@ -16,7 +16,7 @@ class HomeScreen extends React.Component {
       activeRover: undefined,
     };
 
-    this.activateRover = this.activateRover.bind(this);
+    this.activateRover         = this.activateRover.bind(this);
     this.toggleHorizontalSwipe = this.toggleHorizontalSwipe.bind(this);
   }
 
@@ -26,20 +26,20 @@ class HomeScreen extends React.Component {
     dispatch(fetchData());
   }
 
-  activateRover(i){
+  activateRover(i) {
     let { Mission_Manifest } = this.props;
-    let rover = Mission_Manifest.Rovers[i].Name;
+    let rover                = Mission_Manifest.Rovers[i].Name;
 
-    this.setState({activeRover: rover});
+    this.setState({ activeRover: rover });
   }
 
-  toggleHorizontalSwipe(i){
+  toggleHorizontalSwipe(i) {
     let { dispatch } = this.props;
 
-    if(i === 0){
-      this.setState({onMainNav: true});
-    } else if (i === 1){
-      this.setState({onMainNav: false});
+    if (i === 0) {
+      this.setState({ onMainNav: true });
+    } else if (i === 1) {
+      this.setState({ onMainNav: false });
       dispatch(selectRover(this.state.activeRover));
     }
   }
@@ -78,13 +78,14 @@ class HomeScreen extends React.Component {
                   <Text style={styles.text}> Last Updated: {rover.Max_Date} </Text>
                   <Text style={styles.text}> Total Photos: {rover.Total_Photos} </Text>
                 </View>
-                <Rover
-                  name={rover.Name}
-                  cameras={Cameras_Data.Rovers[i][rover.Name]}
-                  manifest={Mission_Manifest.Rovers[i]}
-                  fetchPictures={(camera, date, page)=>dispatch(fetchPictures(camera, date, page))}
-                  isFetching={Cameras_Data.isFetching}
-                  selectedCamera={Selected.Camera.selected}/>
+                {!Cameras_Data.isFetching &&
+                  <Rover
+                    name={rover.Name}
+                    cameras={Cameras_Data.Rovers[i][rover.Name]}
+                    manifest={Mission_Manifest.Rovers[i]}
+                    fetchPictures={(rover, camera, date, page)=>dispatch(fetchPictures(rover, camera, date, page))}
+                    selectedCamera={Selected.Camera.selected} />
+                }
               </Swiper>
             )
           }

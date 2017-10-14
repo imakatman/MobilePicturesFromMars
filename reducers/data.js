@@ -3,12 +3,8 @@ import {
   SELECT_KEY_INUSE,
   REQUEST_DATA,
   RECEIVE_DATA,
-  REQUEST_PICTURES,
   RECEIVE_PICTURES,
 } from '../actions/getData';
-
-
-
 
 // *
 // *
@@ -96,8 +92,8 @@ export function Mission_Manifest(state = initialState.Mission_Manifest, action) 
 // * ========================================================================== */
 // *
 
-function Pictures(state, action){
-  switch(action.type){
+function Pictures(state, action) {
+  switch (action.type) {
   }
 }
 
@@ -107,13 +103,16 @@ function Cameras(state, action, index) {
       let cameras = action.data.rovers[index].cameras;
       return cameras.map(camera => (
         {
-          [camera.name]: {
-            Name: camera.name,
-            Full_Name: camera.full_name,
-            Pictures: {}
-          }
+          Name: camera.name,
+          Full_Name: camera.full_name,
+          Pictures: {}
         }
       ));
+    case RECEIVE_PICTURES:
+      console.log(action.data);
+    // return Object.assign({}, state, {
+    //   [action.]
+    // })
     default:
       return state;
   }
