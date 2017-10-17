@@ -103,24 +103,13 @@ function Cameras(state, action, index) {
       const data  = action.data.rovers[index].cameras;
       let cameras = {};
       for (let camera of data) {
-        console.log(camera);
         cameras[camera.name] = {
           Name: camera.name,
           Full_Name: camera.full_name,
           Pictures: {}
         }
       }
-      console.log(cameras);
       return Object.assign({}, state, cameras);
-    // return cameras.map(camera => (
-    //   {
-    //     [camera.name]: {
-    //       Name: camera.name,
-    //       Full_Name: camera.full_name,
-    //       Pictures: {}
-    //     }
-    //   }
-    // ));
     case RECEIVE_PICTURES:
       console.log(action.data);
     // return Object.assign({}, state, {

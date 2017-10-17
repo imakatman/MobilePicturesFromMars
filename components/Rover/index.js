@@ -7,7 +7,7 @@ class Rover extends React.PureComponent {
     super(props);
 
     this.state = {
-      selected: (new Map(): Map<string, boolean>)
+      selected: (new Map():Map < string, boolean >)
     };
 
     this._renderNavItem = this._renderNavItem.bind(this);
@@ -17,7 +17,7 @@ class Rover extends React.PureComponent {
   componentWillMount() {
     let rover       = this.props.name,
         data        = this.props.cameras,
-        firstCamera = data[0].Name,
+        firstCamera = Object.keys(data)[0].Name,
         maxDate     = this.props.manifest.Max_Date;
 
     this.props.fetchPictures(rover, firstCamera, maxDate, 1);
@@ -36,6 +36,7 @@ class Rover extends React.PureComponent {
   };
 
   _renderNavItem = ({ item }) => {
+    console.log(item);
     const name = Object.keys(item)[0];
     const data = item[name];
 
