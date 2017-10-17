@@ -1,0 +1,80 @@
+App_State: {
+    // redux-persist should ignore the Mission_Manifest and Selected reducers
+    // fetch("nasa api rovers")
+    "Api_Keys": {
+        "indexOfKeyInUse": 0,
+        "Keys": [{
+                "key": "8m8bkcVYqxE5j0vQL2wk1bpiBGibgaqCrOvwZVyU",
+                "inUse": true,
+                "exhausted": false
+            },
+            // "a4q0jhngYKp9kn0cuwvKMHtKz7IrkKtFBRaiMv5t",
+            // "ef0eRn0aLh0Byb8q7wCniHbiqcjfDWITSIJVh9xy"
+        ],
+    },
+    "Mission_Manifest": {
+        "isFetching": false,
+        "Rovers": [{
+                "name": "Curiosity",
+                "id": 5,
+                "Total_Photos": 2900,
+                "Status": "active",
+                "Max_Sol": 900,
+                "Max_Date": "2017-08-21",
+            },
+            // Opportunity
+            // Spirit
+        ]
+    },
+    "Cameras_Data": {
+        // ~~ Selected Rover Screen
+        // ~~~ If Mission_Manifest is still fetching, show "Loading..."
+        "isFetching": false,
+        "Rovers": [{
+            "Curiosity": {
+                "FHAVCAM": {
+                    "Name": "FHAVCAM",
+                    "Full_Name": "Front Hazard Avoidance Camera",
+                    "Pictures": {
+                        "2017-08-21": [
+                            // imageObject,
+                            // imageObject,
+                        ],
+                        // * loadMore(rover, Selected.Camera.Date)
+                        // *** fetch(domain?rover&max_date&camera&page2)
+                        // *** if json returns empty object...
+                        // *** fetch(domain?rover&max_date - 1&camera&page1)
+                        "2017-08-20": [
+                            // imageObject,
+                            // imageObject,
+                        ],
+                    }
+                },
+                // ...
+            },
+            // ...
+        }],
+    },
+    "Selected": {
+        // * selectRover(rover, max_date)
+        // *** fetch(domain?rover&max_date&firstCameraInArray&page1)
+        "Rover": {
+            "Name": "Curiosity",
+            "selected": true
+        },
+        "Camera": {
+            "Name": "FHAVCAM",
+            "Full_Name": "Front Hazard Avoidance Camera",
+            "Date": "2017-08-20",
+            "Sol": 899,
+            "isFetching": false,
+            "selected": true,
+            "validated": true
+        },
+        "Image": {
+            "isSelected": true,
+            "index": 29011,
+            "Img_Src": "image url"
+        }
+    },
+}
