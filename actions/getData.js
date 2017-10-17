@@ -29,7 +29,7 @@ export function fetchPictures(rover, camera, date, page) {
     let store    = getState();
     let Api_Keys = store.Api_Keys;
     let apiKey   = Api_Keys.keyInUse;
-    let fullName = store.Cameras_Data.Rovers[rover][camera].Full_Name;
+    let fullName = store.Selected.Rover[rover];
 
     dispatch(requestPictures(camera, fullName, date, page));
     return fetch(`${API_URL}/${rover}/photos?earth_date=${date}&api_key=${apiKey}`)
