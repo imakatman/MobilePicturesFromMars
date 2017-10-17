@@ -37,7 +37,7 @@ class Rover extends React.PureComponent {
 
   _renderNavItem = ({ item }) => {
     console.log(item);
-    const name = Object.keys(item)[0];
+    const name = Object.keys(item)[0].Name;
     const data = item[name];
 
     return (
@@ -52,15 +52,17 @@ class Rover extends React.PureComponent {
 
   render() {
     if (this.props.isFetching) {
+      console.log(this.props.isFetching);
       return (
         <View style={styles.slide1}>
           <Text
-            style={styles.heading}>
+            style={[styles.heading, styles.marsOrange]}>
             Loading...
           </Text>
         </View>
       )
     } else {
+      console.log(this.props.isFetching);
       return (
         <View style={styles.slide1}>
           <Text style={styles.heading}>{this.props.name}</Text>
@@ -102,6 +104,9 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: 'bold',
     textAlign: 'left'
+  },
+  marsOrange: {
+    color: '#a74808',
   },
   camNav: {
     backgroundColor: '#fff'
