@@ -1,3 +1,5 @@
+import { selectRover, selectCamera } from './selected';
+
 const API_URL = `https://api.nasa.gov/mars-photos/api/v1/rovers`;
 
 // =============== **************
@@ -8,33 +10,38 @@ const API_URL = `https://api.nasa.gov/mars-photos/api/v1/rovers`;
 //
 // =============== **************
 
-export function fetchData() {
-  return function (dispatch, getState) {
-    let store    = getState();
-    let Api_Keys = store.Api_Keys;
-    let apiKey = Api_Keys.keyInUse;
-
-    dispatch(selectKeyInUse(apiKey));
-    dispatch(requestData());
-    return fetch(`${API_URL}?api_key=${apiKey}`)
-      .then(response => response.json())
-      .then(json => dispatch(receiveData(json)));
-  }
-}
-
-export const FETCH_PICTURES = "fetchPictures";
-
-export function fetchPictures(rover, camera, date, page) {
+export function fetchManifest() {
   return function (dispatch, getState) {
     let store    = getState();
     let Api_Keys = store.Api_Keys;
     let apiKey   = Api_Keys.keyInUse;
-    let fullName = store.Selected.Rover[rover];
 
-    dispatch(requestPictures(camera, fullName, date, page));
-    return fetch(`${API_URL}/${rover}/photos?earth_date=${date}&api_key=${apiKey}`)
+    dispatch(selectKeyInUse(apiKey));
+    dispatch(requestManifest());
+    return fetch(`${API_URL}?api_key=${apiKey}`)
       .then(response => response.json())
-      .then(json => dispatch(receivePictures(json)));
+      .then(json => {
+        dispatch(receiveManifest(json));
+        dispatch(selectRover("Curiosity"));
+      });
+  }
+}
+
+export function fetchMaxDatePicsFromAllCams(rover, date) {
+  return function (dispatch, getState) {
+    let store       = getState();
+    let Api_Keys    = store.Api_Keys;
+    let apiKey      = Api_Keys.keyInUse;
+    let dateToFetch = date || store.Mission_Manifest.Rovers.filter(data => data.Name === rover)[0].Max_Date;
+
+    // console.log(dateToFetch);
+    dispatch(requestPictures(camera, rover, dateToFetch, 1));
+    return fetch(`${API_URL}/${rover}/photos?earth_date=${dateToFetch}&api_key=${apiKey}`)
+      .then(response => response.json())
+      .then(json => {
+        dispatch(receivePictures(json));
+        dispatch(selectCamera(camera, dateToFetch));
+      });
   }
 }
 
@@ -55,28 +62,32 @@ function selectKeyInUse(keyInUse) {
   }
 }
 
-export const REQUEST_DATA = 'requestData';
+export const REQUEST_MANIFEST = 'requestManifest';
 
-function requestData() {
+function requestManifest() {
   return {
-    type: REQUEST_DATA,
+    type: REQUEST_MANIFEST,
   }
 }
 
-export const RECEIVE_DATA = 'receiveData';
+export const RECEIVE_MANIFEST = 'receiveManifest';
 
-function receiveData(data) {
+function receiveManifest(data) {
   return {
-    type: RECEIVE_DATA,
+    type: RECEIVE_MANIFEST,
     data,
   }
 }
 
 export const REQUEST_PICTURES = 'requestPictures';
 
-function requestPictures() {
+function requestPictures(camera, name, date, page) {
   return {
     type: REQUEST_PICTURES,
+    camera,
+    name,
+    date,
+    page
   }
 }
 

@@ -1,8 +1,8 @@
 import initialState from '../initialState';
 import {
   SELECT_KEY_INUSE,
-  REQUEST_DATA,
-  RECEIVE_DATA,
+  REQUEST_MANIFEST,
+  RECEIVE_MANIFEST,
   RECEIVE_PICTURES,
 } from '../actions/getData';
 
@@ -53,7 +53,7 @@ export function Api_Keys(state = initialState.Api_Keys, action) {
 
 function Rovers_Mission(state = initialState.Mission_Manifest.Rovers, action) {
   switch (action.type) {
-    case RECEIVE_DATA:
+    case RECEIVE_MANIFEST:
       let rovers = action.data.rovers;
       return rovers.map(rover => (
         {
@@ -72,11 +72,11 @@ function Rovers_Mission(state = initialState.Mission_Manifest.Rovers, action) {
 
 export function Mission_Manifest(state = initialState.Mission_Manifest, action) {
   switch (action.type) {
-    case REQUEST_DATA:
+    case REQUEST_MANIFEST:
       return Object.assign({}, state, {
         isFetching: true
       });
-    case RECEIVE_DATA:
+    case RECEIVE_MANIFEST:
       return Object.assign({}, state, {
         isFetching: false,
         Rovers: Rovers_Mission(state, action)
@@ -99,19 +99,30 @@ function Pictures(state, action) {
 
 function Cameras(state, action, index) {
   switch (action.type) {
-    case RECEIVE_DATA:
-      const data  = action.data.rovers[index].cameras;
-      let cameras = {};
-      for (let camera of data) {
-        cameras[camera.name] = {
+    case RECEIVE_MANIFEST:
+      const data = action.data.rovers[index].cameras;
+      // console.log(data);
+      // let cameras = {};
+      // for (let camera of data) {
+      //   cameras[camera.name] = {
+      //     Name: camera.name,
+      //     Full_Name: camera.full_name,
+      //     Pictures: {}
+      //   }
+      // }
+      // return Object.assign({}, state, cameras);
+      let cameras = data.map(camera => (
+        {
           Name: camera.name,
           Full_Name: camera.full_name,
           Pictures: {}
         }
-      }
-      return Object.assign({}, state, cameras);
+      ));
+      return Object.assign({}, state, {
+        Cameras: cameras
+      });
     case RECEIVE_PICTURES:
-      console.log(action.data);
+      // console.log(action.data);
     // return Object.assign({}, state, {
     //   [action.]
     // })
@@ -122,7 +133,7 @@ function Cameras(state, action, index) {
 
 function Rovers(state = initialState.Cameras_Data.Rovers, action) {
   switch (action.type) {
-    case RECEIVE_DATA:
+    case RECEIVE_MANIFEST:
       let rovers = action.data.rovers;
       return rovers.map((rover, roverIndex) => (
         Object.assign({}, state, {
@@ -136,11 +147,11 @@ function Rovers(state = initialState.Cameras_Data.Rovers, action) {
 
 export function Cameras_Data(state = initialState.Cameras_Data, action) {
   switch (action.type) {
-    case REQUEST_DATA:
+    case REQUEST_MANIFEST:
       return Object.assign({}, state, {
         isFetching: true
       });
-    case RECEIVE_DATA:
+    case RECEIVE_MANIFEST:
       return Object.assign({}, state, {
         isFetching: false,
         Rovers: Rovers(state.Rovers, action)

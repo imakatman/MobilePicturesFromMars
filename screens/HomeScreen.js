@@ -3,7 +3,7 @@ import Swiper from 'react-native-swiper';
 import { StyleSheet, StatusBar, View, TouchableHighlight, Text } from 'react-native';
 import { connect } from 'react-redux';
 
-import { fetchData, fetchPictures } from '../actions/getData';
+import { fetchManifest, fetchMaxDatePicsFromAllCams } from '../actions/getData';
 import { selectRover } from '../actions/selected';
 import Rover from '../components/Rover';
 
@@ -23,9 +23,14 @@ class HomeScreen extends React.Component {
   componentWillMount() {
     let { dispatch } = this.props;
 
-    dispatch(fetchData());
+    dispatch(fetchManifest());
+    dispatch(selectRover("Curiosity"));
+    this.setState({ activeRover: "Curiosity" });
   }
 
+  // ******************
+  // When the index of the Main Navigation Swiper changes, activate the rover of the corresponding current index
+  // ******************
   activateRover(i) {
     let { Mission_Manifest } = this.props;
     let rover                = Mission_Manifest.Rovers[i].Name;
@@ -33,14 +38,21 @@ class HomeScreen extends React.Component {
     this.setState({ activeRover: rover });
   }
 
+  // ******************
+  // The Swiper for the Rovers: 0 index is Navigation 1 index is Rover container
+  // If the index is 0, allow the user to swipe. If index is 1, don't allow user to swipe.
+  // The logic for nested Swipers isn't totally intuitive so look at the code and test if something goes wrong.
+  // ******************
   toggleHorizontalSwipe(i) {
-    let { dispatch } = this.props;
+    let { dispatch, Selected } = this.props;
 
     if (i === 0) {
       this.setState({ onMainNav: true });
     } else if (i === 1) {
       this.setState({ onMainNav: false });
-      dispatch(selectRover(this.state.activeRover));
+      if(this.state.activeRover !== Selected.Rover.Name ){
+        dispatch(selectRover(this.state.activeRover));
+      }
     }
   }
 
@@ -78,14 +90,13 @@ class HomeScreen extends React.Component {
                   <Text style={styles.text}> Last Updated: {rover.Max_Date} </Text>
                   <Text style={styles.text}> Total Photos: {rover.Total_Photos} </Text>
                 </View>
-                {!Cameras_Data.isFetching &&
-                  <Rover
-                    name={rover.Name}
-                    cameras={Cameras_Data.Rovers[i][rover.Name]}
-                    manifest={Mission_Manifest.Rovers[i]}
-                    fetchPictures={(rover, camera, date, page)=>dispatch(fetchPictures(rover, camera, date, page))}
-                    selectedCamera={Selected.Camera.selected} />
-                }
+                <Rover
+                  name={rover.Name}
+                  cameras={Cameras_Data.Rovers[i][rover.Name].Cameras}
+                  manifest={Mission_Manifest.Rovers[i]}
+                  isFetching={Cameras_Data.isFetching}
+                  fetchMaxDatePicsFromAllCams={(rover, camera, date, page)=>dispatch(fetchMaxDatePicsFromAllCams(rover, camera, date, page))}
+                  selectedCamera={Selected.Camera.selected} />
               </Swiper>
             )
           }

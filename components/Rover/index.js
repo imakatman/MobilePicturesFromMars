@@ -1,58 +1,49 @@
 import React from 'react';
-// import Swiper from 'react-native-swiper';
+import Swiper from 'react-native-swiper';
 import { StyleSheet, View, StatusBar, FlatList, TouchableHighlight, Text } from 'react-native';
+
+import Pictures from '../Pictures';
 
 class Rover extends React.PureComponent {
   constructor(props) {
     super(props);
 
-    this.state = {
-      selected: (new Map():Map < string, boolean >)
-    };
-
     this._renderNavItem = this._renderNavItem.bind(this);
     this.pressNavItem   = this.pressNavItem.bind(this);
   }
 
-  componentWillMount() {
-    let rover       = this.props.name,
-        data        = this.props.cameras,
-        firstCamera = Object.keys(data)[0].Name,
-        maxDate     = this.props.manifest.Max_Date;
-
-    this.props.fetchPictures(rover, firstCamera, maxDate, 1);
+  componentWillMount(){
+    this.props.fetchMaxDatePicsFromAllCams(this.props.name);
   }
 
+  // componentWillReceiveProps(nextProps){
+    // this.setState((prevState) => {
+    //   let data = {};
+    //   for(let state of prevState){
+    //     // if(state !== prevState){
+    //     //   data[state] =
+    //     // }
+    //     console.log(state);
+    //   }
+    // })
+  // }
+
   pressNavItem = (camera: string) => {
-    console.log(this.state.selected);
-    console.log(camera);
-    // updater functions are preferred for transactional updates
-    this.setState((state) => {
-      // copy the map rather than modifying state.
-      const selected = new Map(state.selected);
-      selected.set(camera, !selected.get(camera)); // toggle
-      return { selected };
-    }, () => console.log(this.state.selected));
+    // this.props.fetchPictures(this.props.name, camera);
   };
 
   _renderNavItem = ({ item }) => {
-    console.log(item);
-    const name = Object.keys(item)[0].Name;
-    const data = item[name];
-
     return (
       <Text
         style={styles.navItem}
-        onPress={() => this.pressNavItem(data.Name)}
-        selected={!!this.state.selected.get(data.Name)}>
-        {data.Name}
+        onPress={() => this.pressNavItem(item.Name)}>
+        {item.Name}
       </Text>
     );
   }
 
   render() {
     if (this.props.isFetching) {
-      console.log(this.props.isFetching);
       return (
         <View style={styles.slide1}>
           <Text
@@ -62,7 +53,6 @@ class Rover extends React.PureComponent {
         </View>
       )
     } else {
-      console.log(this.props.isFetching);
       return (
         <View style={styles.slide1}>
           <Text style={styles.heading}>{this.props.name}</Text>
@@ -73,23 +63,21 @@ class Rover extends React.PureComponent {
             keyExtractor={(item, index) => index}
             renderItem={this._renderNavItem}
           />
-          {!this.props.selectedCamera ? (
-              <Text>Loading...</Text>
-            ) : (
-              <Text>A camera has been selected</Text>
+          <Swiper
+            showsPagination={false}
+            loadMinimal={true}
+            loop={false}>
+            {this.props.cameras.map(camera =>
+              <Pictures
+                key={camera.Name}
+                {...camera}/>
             )}
+          </Swiper>
         </View>
       );
     }
   }
 }
-
-{/*<FlatList*/}
-{/*/!*style={styles.camNav}*!/*/}
-{/*data={}*/}
-{/*keyExtractor={(item, index) => index}*/}
-{/*renderItem={this._renderPhotoItem}*/}
-{/*/>*/}
 
 export default Rover;
 
@@ -109,9 +97,10 @@ const styles = StyleSheet.create({
     color: '#a74808',
   },
   camNav: {
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
   },
   navItem: {
+    flex: 0.5,
     fontSize: 20,
     letterSpacing: 1,
     paddingTop: 10,
