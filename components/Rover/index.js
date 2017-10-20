@@ -43,6 +43,10 @@ class Rover extends React.PureComponent {
   }
 
   render() {
+    // let navigation = this.props.cameras.unshift("Latest");
+    let navigation = this.props.cameras;
+    console.log(this.props.cameras);
+
     if (this.props.isFetching) {
       return (
         <View style={styles.slide1}>
@@ -59,7 +63,7 @@ class Rover extends React.PureComponent {
           <FlatList
             style={styles.camNav}
             horizontal
-            data={this.props.cameras}
+            data={navigation}
             keyExtractor={(item, index) => index}
             renderItem={this._renderNavItem}
           />

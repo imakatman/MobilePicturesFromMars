@@ -29,7 +29,10 @@ App_State: {
     "Cameras_Data": {
         // ~~ Selected Rover Screen
         // ~~~ If Mission_Manifest is still fetching, show "Loading..."
-        "isFetching": false,
+        "isFetching": {
+            "data": false,
+            "picturesFromMaxDate": false,
+        },
         "Rovers": [{
             "Curiosity": {
                 "FHAVCAM": {

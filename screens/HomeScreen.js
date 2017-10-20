@@ -3,7 +3,7 @@ import Swiper from 'react-native-swiper';
 import { StyleSheet, StatusBar, View, TouchableHighlight, Text } from 'react-native';
 import { connect } from 'react-redux';
 
-import { fetchManifest, fetchMaxDatePicsFromAllCams } from '../actions/getData';
+import { fetchManifestAndCameras, fetchMaxDatePicsFromAllCams } from '../actions/getData';
 import { selectRover } from '../actions/selected';
 import Rover from '../components/Rover';
 
@@ -23,7 +23,7 @@ class HomeScreen extends React.Component {
   componentWillMount() {
     let { dispatch } = this.props;
 
-    dispatch(fetchManifest());
+    dispatch(fetchManifestAndCameras());
     dispatch(selectRover("Curiosity"));
     this.setState({ activeRover: "Curiosity" });
   }
@@ -59,13 +59,13 @@ class HomeScreen extends React.Component {
   render() {
     let { dispatch, Mission_Manifest, Cameras_Data, Selected } = this.props;
 
-    if (Mission_Manifest.isFetching) {
+    if (Mission_Manifest.isFetching || Cameras_Data.isFetching.data ) {
       return (
         <View style={styles.slide1}>
           <Text style={styles.text}>Loading...</Text>
         </View>
       )
-    } else if (!Mission_Manifest.isFetching) {
+    } else if (!Mission_Manifest.isFetching && !Cameras_Data.isFetching.data ) {
       return (
         <Swiper
           style={styles.wrapper}
@@ -94,7 +94,7 @@ class HomeScreen extends React.Component {
                   name={rover.Name}
                   cameras={Cameras_Data.Rovers[i][rover.Name].Cameras}
                   manifest={Mission_Manifest.Rovers[i]}
-                  isFetching={Cameras_Data.isFetching}
+                  isFetching={Cameras_Data.isFetching.picturesFromMaxDate}
                   fetchMaxDatePicsFromAllCams={(rover, camera, date, page)=>dispatch(fetchMaxDatePicsFromAllCams(rover, camera, date, page))}
                   selectedCamera={Selected.Camera.selected} />
               </Swiper>

@@ -10,38 +10,36 @@ const API_URL = `https://api.nasa.gov/mars-photos/api/v1/rovers`;
 //
 // =============== **************
 
-export function fetchManifest() {
+export function fetchManifestAndCameras() {
   return function (dispatch, getState) {
     let store    = getState();
     let Api_Keys = store.Api_Keys;
     let apiKey   = Api_Keys.keyInUse;
 
     dispatch(selectKeyInUse(apiKey));
-    dispatch(requestManifest());
+    dispatch(requestManifestAndCameras());
     return fetch(`${API_URL}?api_key=${apiKey}`)
       .then(response => response.json())
       .then(json => {
         dispatch(receiveManifest(json));
+        dispatch(receiveCameras(json));
         dispatch(selectRover("Curiosity"));
       });
   }
 }
 
-export function fetchMaxDatePicsFromAllCams(rover, date) {
+export function fetchMaxDatePicsFromAllCams(rover) {
   return function (dispatch, getState) {
     let store       = getState();
     let Api_Keys    = store.Api_Keys;
     let apiKey      = Api_Keys.keyInUse;
-    let dateToFetch = date || store.Mission_Manifest.Rovers.filter(data => data.Name === rover)[0].Max_Date;
+    let dateToFetch = store.Mission_Manifest.Rovers.filter(data => data.Name === rover)[0].Max_Date;
+    // let firstCamera = store.Cameras_Data.Rovers.filter(data => data.Name === rover)[0].Name;
 
-    // console.log(dateToFetch);
-    dispatch(requestPictures(camera, rover, dateToFetch, 1));
+    dispatch(requestPicturesFromAllRovers());
     return fetch(`${API_URL}/${rover}/photos?earth_date=${dateToFetch}&api_key=${apiKey}`)
       .then(response => response.json())
-      .then(json => {
-        dispatch(receivePictures(json));
-        dispatch(selectCamera(camera, dateToFetch));
-      });
+      .then(json => dispatch(receivePicturesFromAllRovers(json)));
   }
 }
 
@@ -62,11 +60,11 @@ function selectKeyInUse(keyInUse) {
   }
 }
 
-export const REQUEST_MANIFEST = 'requestManifest';
+export const REQUEST_MANIFEST_AND_CAMERAS = 'requestManifestAndCameras';
 
-function requestManifest() {
+function requestManifestAndCameras() {
   return {
-    type: REQUEST_MANIFEST,
+    type: REQUEST_MANIFEST_AND_CAMERAS,
   }
 }
 
@@ -79,23 +77,28 @@ function receiveManifest(data) {
   }
 }
 
-export const REQUEST_PICTURES = 'requestPictures';
+export const RECEIVE_CAMERAS = 'receiveCameras';
 
-function requestPictures(camera, name, date, page) {
+function receiveCameras(data) {
   return {
-    type: REQUEST_PICTURES,
-    camera,
-    name,
-    date,
-    page
+    type: RECEIVE_CAMERAS,
+    data,
   }
 }
 
-export const RECEIVE_PICTURES = 'receivePictures';
+export const REQUEST_PICTURES_FROM_ALL_ROVERS = 'requestPicturesFromAllRovers';
 
-function receivePictures(data) {
+function requestPicturesFromAllRovers() {
   return {
-    type: RECEIVE_PICTURES,
+    type: REQUEST_PICTURES_FROM_ALL_ROVERS,
+  }
+}
+
+export const RECEIVE_PICTURES_FROM_ALL_ROVERS = 'receivePicturesFromAllRovers';
+
+function receivePicturesFromAllRovers(data) {
+  return {
+    type: RECEIVE_PICTURES_FROM_ALL_ROVERS,
     data
   }
 }

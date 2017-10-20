@@ -3,11 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="b1cfcd08-6949-4f69-abf4-aa3e8f3fea69" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.expo/packager-info.json" afterPath="$PROJECT_DIR$/.expo/packager-info.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/actions/getData.js" afterPath="$PROJECT_DIR$/actions/getData.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/components/Rover/index.js" afterPath="$PROJECT_DIR$/components/Rover/index.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/reducers/data.js" afterPath="$PROJECT_DIR$/reducers/data.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/screens/HomeScreen.js" afterPath="$PROJECT_DIR$/screens/HomeScreen.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storeState.json" afterPath="$PROJECT_DIR$/storeState.json" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -24,11 +24,11 @@
     <splitter split-orientation="horizontal" split-proportion="0.5">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="HomeScreen.js" pinned="false" current-in-tab="true">
+          <file leaf-file-name="HomeScreen.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/screens/HomeScreen.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="810">
-                  <caret line="58" column="12" lean-forward="true" selection-start-line="58" selection-start-column="12" selection-end-line="58" selection-end-column="12" />
+                <state relative-caret-position="780">
+                  <caret line="96" column="73" lean-forward="false" selection-start-line="96" selection-start-column="53" selection-end-line="96" selection-end-column="73" />
                   <folding>
                     <element signature="e#0#26#0" expanded="true" />
                   </folding>
@@ -36,13 +36,14 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
+          <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/components/Rover/index.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="210">
-                  <caret line="14" column="23" lean-forward="false" selection-start-line="14" selection-start-column="23" selection-end-line="14" selection-end-column="23" />
+                <state relative-caret-position="555">
+                  <caret line="46" column="40" lean-forward="true" selection-start-line="46" selection-start-column="40" selection-end-line="46" selection-end-column="40" />
                   <folding>
                     <element signature="e#0#26#0" expanded="true" />
+                    <marker date="1508521914000" expanded="true" signature="1098:1152" ph="..." />
                   </folding>
                 </state>
               </provider>
@@ -77,21 +78,21 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="getData.js" pinned="false" current-in-tab="true">
+          <file leaf-file-name="getData.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/actions/getData.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="180">
-                  <caret line="12" column="16" lean-forward="true" selection-start-line="12" selection-start-column="16" selection-end-line="12" selection-end-column="29" />
+                <state relative-caret-position="932">
+                  <caret line="90" column="38" lean-forward="false" selection-start-line="90" selection-start-column="38" selection-end-line="90" selection-end-column="38" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="data.js" pinned="false" current-in-tab="false">
+          <file leaf-file-name="data.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/reducers/data.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1352">
-                  <caret line="107" column="31" lean-forward="false" selection-start-line="107" selection-start-column="31" selection-end-line="107" selection-end-column="31" />
+                <state relative-caret-position="617">
+                  <caret line="148" column="24" lean-forward="false" selection-start-line="148" selection-start-column="24" selection-end-line="148" selection-end-column="24" />
                   <folding>
                     <element signature="e#0#43#0" expanded="true" />
                   </folding>
@@ -119,6 +120,8 @@
       <find>activateRover</find>
       <find>activeRover</find>
       <find>store.</find>
+      <find>req</find>
+      <find>Cameras_Data</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -140,11 +143,11 @@
         <option value="$PROJECT_DIR$/store.js" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/App.js" />
-        <option value="$PROJECT_DIR$/reducers/data.js" />
         <option value="$PROJECT_DIR$/components/Pictures/index.js" />
-        <option value="$PROJECT_DIR$/components/Rover/index.js" />
-        <option value="$PROJECT_DIR$/actions/getData.js" />
         <option value="$PROJECT_DIR$/screens/HomeScreen.js" />
+        <option value="$PROJECT_DIR$/actions/getData.js" />
+        <option value="$PROJECT_DIR$/components/Rover/index.js" />
+        <option value="$PROJECT_DIR$/reducers/data.js" />
       </list>
     </option>
   </component>
@@ -362,12 +365,12 @@
       <workItem from="1507424316346" duration="20570000" />
       <workItem from="1507657718119" duration="19470000" />
       <workItem from="1508257358662" duration="2120000" />
-      <workItem from="1508296877659" duration="10295000" />
+      <workItem from="1508296877659" duration="12593000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="69482000" />
+    <option name="totallyTimeSpent" value="71780000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="110" width="2560" height="1325" extended-state="0" />
@@ -458,6 +461,7 @@
           <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
+            <marker date="1508521914000" expanded="true" signature="1098:1152" ph="..." />
           </folding>
         </state>
       </provider>
@@ -544,6 +548,7 @@
           <caret line="19" column="48" lean-forward="true" selection-start-line="19" selection-start-column="48" selection-end-line="19" selection-end-column="48" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
+            <marker date="1508521914000" expanded="true" signature="1098:1152" ph="..." />
           </folding>
         </state>
       </provider>
@@ -750,40 +755,41 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/components/Rover/index.js">
+    <entry file="file://$PROJECT_DIR$/screens/HomeScreen.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="23" lean-forward="false" selection-start-line="14" selection-start-column="23" selection-end-line="14" selection-end-column="23" />
+        <state relative-caret-position="780">
+          <caret line="96" column="73" lean-forward="false" selection-start-line="96" selection-start-column="53" selection-end-line="96" selection-end-column="73" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/reducers/data.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1352">
-          <caret line="107" column="31" lean-forward="false" selection-start-line="107" selection-start-column="31" selection-end-line="107" selection-end-column="31" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/actions/getData.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="16" lean-forward="true" selection-start-line="12" selection-start-column="16" selection-end-line="12" selection-end-column="29" />
+        <state relative-caret-position="932">
+          <caret line="90" column="38" lean-forward="false" selection-start-line="90" selection-start-column="38" selection-end-line="90" selection-end-column="38" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/screens/HomeScreen.js">
+    <entry file="file://$PROJECT_DIR$/components/Rover/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="810">
-          <caret line="58" column="12" lean-forward="true" selection-start-line="58" selection-start-column="12" selection-end-line="58" selection-end-column="12" />
+        <state relative-caret-position="555">
+          <caret line="46" column="40" lean-forward="true" selection-start-line="46" selection-start-column="40" selection-end-line="46" selection-end-column="40" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
+            <marker date="1508521914000" expanded="true" signature="1098:1152" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/reducers/data.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="617">
+          <caret line="148" column="24" lean-forward="false" selection-start-line="148" selection-start-column="24" selection-end-line="148" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
           </folding>
         </state>
       </provider>

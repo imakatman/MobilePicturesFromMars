@@ -1,9 +1,12 @@
 import initialState from '../initialState';
 import {
   SELECT_KEY_INUSE,
-  REQUEST_MANIFEST,
+  REQUEST_MANIFEST_AND_CAMERAS,
   RECEIVE_MANIFEST,
+  RECEIVE_CAMERAS,
   RECEIVE_PICTURES,
+  REQUEST_PICTURES_FROM_ALL_ROVERS,
+  RECEIVE_PICTURES_FROM_ALL_ROVERS
 } from '../actions/getData';
 
 // *
@@ -72,7 +75,7 @@ function Rovers_Mission(state = initialState.Mission_Manifest.Rovers, action) {
 
 export function Mission_Manifest(state = initialState.Mission_Manifest, action) {
   switch (action.type) {
-    case REQUEST_MANIFEST:
+    case REQUEST_MANIFEST_AND_CAMERAS:
       return Object.assign({}, state, {
         isFetching: true
       });
@@ -99,7 +102,7 @@ function Pictures(state, action) {
 
 function Cameras(state, action, index) {
   switch (action.type) {
-    case RECEIVE_MANIFEST:
+    case RECEIVE_CAMERAS:
       const data = action.data.rovers[index].cameras;
       // console.log(data);
       // let cameras = {};
@@ -122,7 +125,7 @@ function Cameras(state, action, index) {
         Cameras: cameras
       });
     case RECEIVE_PICTURES:
-      // console.log(action.data);
+    // console.log(action.data);
     // return Object.assign({}, state, {
     //   [action.]
     // })
@@ -133,13 +136,19 @@ function Cameras(state, action, index) {
 
 function Rovers(state = initialState.Cameras_Data.Rovers, action) {
   switch (action.type) {
-    case RECEIVE_MANIFEST:
+    case RECEIVE_CAMERAS:
       let rovers = action.data.rovers;
       return rovers.map((rover, roverIndex) => (
         Object.assign({}, state, {
           [rover.name]: Cameras(state[rover.name], action, roverIndex)
         })
       ));
+    case RECEIVE_PICTURES_FROM_ALL_ROVERS:
+      return Object.assign({}, state, {
+        Latest: {
+          Name: "LATEST"
+        }
+      });
     default:
       return state;
   }
@@ -147,13 +156,31 @@ function Rovers(state = initialState.Cameras_Data.Rovers, action) {
 
 export function Cameras_Data(state = initialState.Cameras_Data, action) {
   switch (action.type) {
-    case REQUEST_MANIFEST:
+    case REQUEST_MANIFEST_AND_CAMERAS:
       return Object.assign({}, state, {
-        isFetching: true
+        isFetching: {
+          data: true
+        }
       });
-    case RECEIVE_MANIFEST:
+    case RECEIVE_CAMERAS:
       return Object.assign({}, state, {
-        isFetching: false,
+        isFetching: {
+          data: false
+        },
+        Rovers: Rovers(state.Rovers, action)
+      });
+    case REQUEST_PICTURES_FROM_ALL_ROVERS:
+      return Object.assign({}, state, {
+        isFetching: {
+          picturesFromMaxDate: true
+        }
+      });
+    case RECEIVE_PICTURES_FROM_ALL_ROVERS:
+      console.log(action.data);
+      return Object.assign({}, state, {
+        isFetching: {
+          picturesFromMaxDate: false
+        },
         Rovers: Rovers(state.Rovers, action)
       });
     default:
